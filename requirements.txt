@@ -2,4 +2,3 @@ streamlit
 whisper
 pydub
 torch
-ffmpeg
