@@ -17,7 +17,7 @@ def transcribe_audio(file_path, model_size="base"):
     return result["text"]
 
 # Streamlit App
-st.title("Audio Transcription App with Whisper")
+st.markdown("<h2 style='text-align: center;'>Audio Transcription App with Whisper</h2>", unsafe_allow_html=True)
 
 # File upload
 uploaded_file = st.file_uploader("Upload an audio file (e.g., .m4a, .mp3, .wav)", type=["m4a", "mp3", "wav"])
@@ -54,6 +54,10 @@ if uploaded_file:
             # Save transcription to a file
             with open("transcription.txt", "w") as f:
                 f.write(transcription_text)
+                
+            # Add a download button
+            st.download_button("Download Transcription", transcription_text, file_name="transcription.txt")
+            
             st.success("Transcription completed. Saved to transcription.txt")
             progress_bar.progress(100)
         
@@ -62,6 +66,7 @@ if uploaded_file:
             progress_bar.empty()
 else:
     st.warning("Please upload an audio file to start.")
+
 
 
 # Streamlit runs continuously until manually stopped.
